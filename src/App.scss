@@ -1,0 +1,112 @@
+$textColorDefault: #ccc;
+$textColorHighlight: #44d62c;
+$leftPaneBackgroundColor: #111111;
+$rightPaneBackgroundColor: #222222;
+$textHoverColor: rgba(255, 255, 255, 0.1);
+$selectionBackgroundColor: rgba(255, 255, 255, 0.1);
+$borderColor: #5d5d5d;
+
+.App {
+  color: $textColorDefault;
+  .highlight-color {
+    color: $textColorHighlight;
+  }
+
+  .main-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+
+    .left-panel {
+      background-color: $leftPaneBackgroundColor;
+      width: 20%;
+      padding: 20px;
+
+      .profiles-container {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid $borderColor;
+        padding: 10px;
+        max-height: 150px;
+        overflow-y: scroll;
+        overflow-x: clip;
+
+        .profile-item {
+          align-items: center;
+          max-height: 30px;
+          height: 30px;
+          display: flex;
+          &:hover {
+            cursor: pointer;
+            background-color: $textHoverColor;
+          }
+          &.selected {
+            background-color: $selectionBackgroundColor;
+            color: $textColorHighlight;
+          }
+          .profile-name {
+            padding: 5px;
+            text-overflow: ellipsis;
+            overflow: auto;
+            width: 100%;
+            max-width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+          .profile-rename-input {
+            margin-left: 5px;
+            border: 1px solid $textColorHighlight;
+            box-sizing: border-box;
+            background-color: $leftPaneBackgroundColor;
+            padding: 3px 10px 5px 5px;
+            line-height: 20px;
+            color: $textColorDefault;
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+      }
+      .toolbar {
+        .left-actions,
+        .right-actions {
+          display: flex;
+          align-items: center;
+        }
+        border: 1px solid $borderColor;
+        display: flex;
+        justify-content: space-between;
+        svg {
+          font-size: 20px;
+          padding: 5px;
+          &:hover {
+            cursor: pointer;
+            background-color: $textHoverColor;
+          }
+          &[disabled] {
+            cursor: default;
+            pointer-events: none;
+            background-color: transparent;
+            opacity: 0.3;
+          }
+        }
+      }
+    }
+    .right-panel {
+      background-color: $rightPaneBackgroundColor;
+      width: 90%;
+
+      .profile-details {
+        word-break: break-all;
+        padding: 20px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 769px) {
+  .App div.main-container {
+    flex-direction: column;
+  }
+}
